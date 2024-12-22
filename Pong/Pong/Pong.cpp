@@ -1,26 +1,13 @@
 #pragma once
 #include <iostream>
-#include "cBall.cpp"
+#include "cGameManager.cpp"
+
 using namespace std;
-
-
 
 int main()
 {
-    cBall c(0, 0);
-
-    cout << c << endl;
-    c.randomDirection();
-    cout << c << endl;
-    c.Move();
-    cout << c << endl;
-    c.randomDirection();
-    c.Move();
-    cout << c << endl;
-    c.randomDirection();
-    c.Move();
-    cout << c << endl;
-
+    cGameManager c(40, 20);
+    c.Run();
     return 0;
 }
 

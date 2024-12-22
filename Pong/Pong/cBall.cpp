@@ -70,7 +70,7 @@ public:
 
     friend ostream& operator<<(ostream& o, cBall c)
     {
-        o << "Ball [" << c.x << "," << c.y << "][" << c.direction << "]" << endl;
+        o << "Ball [" << c.x << "," << c.y << "][" << c.direction << "]";
         return o;
     }
 };
