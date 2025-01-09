@@ -53,9 +53,21 @@ public:
 		player2->Reset();
 	}
 
+	void clearScreen() // Use Direct implementation of "cls" to clear screen without flickering!
+	{
+		HANDLE hOut;
+		COORD Position;
+
+		hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		Position.X = 0;
+		Position.Y = 0;
+		SetConsoleCursorPosition(hOut, Position);
+	}
+
 	void Draw()
 	{
-		system("cls");
+		clearScreen();
 		for (int i = 0; i < width + 2; i++)
 		{
 			cout << "\xB2";
@@ -84,6 +96,7 @@ public:
 				}
 				else if (player1x == j && player1y == i)
 				{
+					//cout << "1";//player1
 					cout << "\xDB";//player1
 				}
 				else if (player2x == j && player2y == i)
@@ -92,6 +105,7 @@ public:
 				}
 				else if (player1x == j && player1y + 1== i)
 				{
+					//cout << "2";//player1
 					cout << "\xDB";//player1
 				}
 				else if (player2x == j && player2y + 1 == i)
@@ -100,6 +114,7 @@ public:
 				}
 				else if (player1x == j && player1y + 2 == i)
 				{
+					//cout << "3";//player1
 					cout << "\xDB";//player1
 				}
 				else if (player2x == j && player2y + 2 == i)
@@ -108,6 +123,7 @@ public:
 				}
 				else if (player1x == j && player1y + 3 == i)
 				{
+					//cout << "4";//player1
 					cout << "\xDB";//player1
 				}
 				else if (player2x == j && player2y + 3 == i)
@@ -129,12 +145,11 @@ public:
 		{
 			cout << "\xB2";
 		}
-		cout << endl << "Score 1: " << score1 << endl << "Score 2: " << score2 << endl;
+		cout << endl << "Score 1: " << score1 << "	" << "	" <<  " Score 2: " << score2 << endl;
 	}
 
 	void Input()
 	{
-		ball->Move();
 
 		int ballx = ball->getX();
 		int bally = ball->getY();
@@ -143,6 +158,8 @@ public:
 		int player1y = player1->getY();
 		int player2y = player2->getY();
 
+		ball->Move();
+		
 		if (_kbhit())
 		{
 			char current = _getch();
@@ -185,13 +202,48 @@ public:
 		for (int i = 0; i < 4; i++)
 			if (ballx == player1x + 1)
 				if (bally == player1y + i)
-					ball->changeDirection((eDir)(rand()% 3 + 4));
+					switch (i)
+					{
+					case 0:
+						ball->changeDirection((eDir)5);
+						break;
+					case 1:
+						ball->changeDirection((eDir)4);
+						break;
+					case 2:
+						ball->changeDirection((eDir)4);
+						break;
+					case 3:
+						ball->changeDirection((eDir)6);
+						break;
+					default:
+						ball->changeDirection((eDir)(rand() % 3 + 4));
+						break;
+					}
+
 
 		//right paddle
 		for (int i = 0; i < 4; i++)
 			if (ballx == player2x - 1)
 				if (bally == player2y + i)
-					ball->changeDirection((eDir)(rand()% 3 + 1));
+					switch (i)
+					{
+					case 0:
+						ball->changeDirection((eDir)2);
+						break;
+					case 1:
+						ball->changeDirection((eDir)1);
+						break;
+					case 2:
+						ball->changeDirection((eDir)1);
+						break;
+					case 3:
+						ball->changeDirection((eDir)3);
+						break;
+					default:
+						ball->changeDirection((eDir)(rand() % 3 + 4));
+						break;
+					}
 
 		//bottom  wall
 		if (bally == height - 1)

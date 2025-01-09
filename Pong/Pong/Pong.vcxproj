@@ -131,11 +131,13 @@
     <ClCompile Include="cGameManager.cpp" />
     <ClCompile Include="cPaddle.cpp" />
     <ClCompile Include="Pong.cpp" />
+    <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cBall.h" />
     <ClInclude Include="cGameManger.h" />
     <ClInclude Include="cPaddle.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
